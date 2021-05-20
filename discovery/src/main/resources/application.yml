@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: discovery-eureka
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery1:8801/eureka/,http://discovery2:8802/eureka/
+
+
+---
+spring:
+  profiles: discovery1                                 # 指定profile=discovery1
+
+server:
+  port: 8801
+
+eureka:
+  instance:
+    hostname: discovery1                               # 指定当profile=discovery1时，主机名
+
+---
+spring:
+  profiles: discovery2                                 # 指定profile=discovery2
+
+server:
+  port: 8802
+
+eureka:
+  instance:
+    hostname: discovery2                               # 指定当profile=discovery2时，主机名
+
