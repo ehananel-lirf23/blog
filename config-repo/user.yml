@@ -1,7 +1,6 @@
 server:
   port: 8601
 
-
 #jwt:
 #  header: blogjwt
 

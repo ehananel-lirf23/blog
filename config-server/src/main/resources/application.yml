@@ -1,0 +1,13 @@
+server:
+  port: 8866
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/hudoufu/blog                    # 配置git仓库的地址
+          search-paths: config-repo                             # git仓库地址下的相对地址，可以配置多个，用,分割。
+          username: fangwenwei0507@163.com                       # git仓库的账号
+          password: ls@fang123                                   # git仓库的密码

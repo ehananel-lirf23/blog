@@ -1,0 +1,8 @@
+server:
+  port: 8602
+
+spring:
+  profiles: dev2
+
+
+
