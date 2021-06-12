@@ -1,0 +1,50 @@
+server:
+  port: 8601
+
+#jwt:
+#  header: blogjwt
+
+spring:
+  application:
+    name: microsoft-user
+  profiles: dev1
+
+  # datasource config
+  datasource:
+    url: jdbc:mysql://192.168.1.104/blog?useSSL=false             # useSSL 允许非ssl方式访问数据库
+    username: root
+    password: lsfang
+    driver-class-name: com.mysql.jdbc.Driver
+    schema: classpath:sqlscripts/schema.sql
+    data: classpath:sqlscripts/data.sql
+
+    # connection pool config
+    hikari:
+      # HikariCP config https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby
+      # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 缺省:30s 最小:250ms
+      connection-timeout: 250
+      # 一个连接idle状态的最大时长（毫秒），超时则被释放（retired），缺省:10分钟 最小:10s
+      idleTimeout: 10000
+      # 一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟
+      # 建议设置比数据库超时时长少30秒，参考MySQL wait_timeout参数（show variables like '%timeout%';）8小时
+      maxLifetime: 30000
+      # 连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+      # 疑问？？？：这个公式是对数据库的核心数还是应用的核心数 effective_spindle_count
+      maximumPoolSize: 20
+    platform: all
+
+  # jap config
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+    generate-ddl: false
+    show-sql: true
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery1:8801/eureka/,http://discovery2:8802/eureka/
+
